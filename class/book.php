@@ -1,19 +1,22 @@
 <?php
-    class Employee{
+    class Book{
 
         // Connection
         private $conn;
 
         // Table
-        private $db_table = "Employee";
+        private $db_table = "book_travel";
 
         // Columns
         public $id;
         public $name;
-        public $email;
-        public $age;
+        public $author;
+        public $collection;
+        public $ISBN;
+        public $dimensions;
         public $designation;
         public $created;
+        public $modified;
 
         // Db connection
         public function __construct($db){
@@ -21,39 +24,50 @@
         }
 
         // GET ALL
-        public function getEmployees(){
-            $sqlQuery = "SELECT id, name, email, age, designation, created FROM " . $this->db_table . "";
+        public function getBooks(){
+            $sqlQuery = "SELECT * FROM " . $this->db_table . "";
             $stmt = $this->conn->prepare($sqlQuery);
             $stmt->execute();
             return $stmt;
         }
 
         // CREATE
-        public function createEmployee(){
+        public function createBook(){
             $sqlQuery = "INSERT INTO
                         ". $this->db_table ."
                     SET
                         name = :name, 
-                        email = :email, 
-                        age = :age, 
-                        designation = :designation, 
-                        created = :created";
+                        author = :author,
+                        collection = :collection, 
+                        ISBN = :ISBN,
+                        dimensions = :dimensions,
+                        designation = :designation,
+                        created = :created,
+                        modified = :modified";
+ 
+
         
             $stmt = $this->conn->prepare($sqlQuery);
         
             // sanitize
             $this->name=htmlspecialchars(strip_tags($this->name));
-            $this->email=htmlspecialchars(strip_tags($this->email));
-            $this->age=htmlspecialchars(strip_tags($this->age));
+            $this->author=htmlspecialchars(strip_tags($this->author));
+            $this->collection=htmlspecialchars(strip_tags($this->collection));
+            $this->ISBN=htmlspecialchars(strip_tags($this->ISBN));
+            $this->dimensions=htmlspecialchars(strip_tags($this->dimensions));
             $this->designation=htmlspecialchars(strip_tags($this->designation));
             $this->created=htmlspecialchars(strip_tags($this->created));
+            $this->modified=htmlspecialchars(strip_tags($this->modified));
         
             // bind data
             $stmt->bindParam(":name", $this->name);
-            $stmt->bindParam(":email", $this->email);
-            $stmt->bindParam(":age", $this->age);
+            $stmt->bindParam(":author", $this->author);
+            $stmt->bindParam(":collection", $this->collection);
+            $stmt->bindParam(":ISBN", $this->ISBN);
+            $stmt->bindParam(":dimensions", $this->dimensions);
             $stmt->bindParam(":designation", $this->designation);
             $stmt->bindParam(":created", $this->created);
+            $stmt->bindParam(":modified", $this->modified);
         
             if($stmt->execute()){
                return true;
@@ -61,15 +75,18 @@
             return false;
         }
 
-        // UPDATE
-        public function getSingleEmployee(){
+        // GET
+        public function getSingleBook(){
             $sqlQuery = "SELECT
                         id, 
                         name, 
-                        email, 
-                        age, 
-                        designation, 
-                        created
+                        author, 
+                        collection, 
+                        ISBN, 
+                        dimensions,
+                        designation,
+                        created, 
+                        modified
                       FROM
                         ". $this->db_table ."
                     WHERE 
@@ -85,41 +102,51 @@
             $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
             
             $this->name = $dataRow['name'];
-            $this->email = $dataRow['email'];
-            $this->age = $dataRow['age'];
+            $this->author = $dataRow['author'];
+            $this->collection = $dataRow['collection'];
+            $this->ISBN = $dataRow['ISBN'];
+            $this->dimensions = $dataRow['dimensions'];
             $this->designation = $dataRow['designation'];
             $this->created = $dataRow['created'];
+            $this->modified = $dataRow['modified'];
         }        
 
         // UPDATE
-        public function updateEmployee(){
+        public function updateBook(){
             $sqlQuery = "UPDATE
                         ". $this->db_table ."
                     SET
                         name = :name, 
-                        email = :email, 
-                        age = :age, 
-                        designation = :designation, 
-                        created = :created
+                        author = :author,
+                        collection = :collection, 
+                        ISBN = :ISBN,
+                        dimensions = :dimensions,
+                        designation = :designation,
+                        created = :created,
+                        modified = :modified
                     WHERE 
                         id = :id";
         
             $stmt = $this->conn->prepare($sqlQuery);
         
             $this->name=htmlspecialchars(strip_tags($this->name));
-            $this->email=htmlspecialchars(strip_tags($this->email));
-            $this->age=htmlspecialchars(strip_tags($this->age));
+            $this->author=htmlspecialchars(strip_tags($this->author));
+            $this->collection=htmlspecialchars(strip_tags($this->collection));
+            $this->ISBN=htmlspecialchars(strip_tags($this->ISBN));
+            $this->dimensions=htmlspecialchars(strip_tags($this->dimensions));
             $this->designation=htmlspecialchars(strip_tags($this->designation));
             $this->created=htmlspecialchars(strip_tags($this->created));
-            $this->id=htmlspecialchars(strip_tags($this->id));
+            $this->modified=htmlspecialchars(strip_tags($this->modified));
         
             // bind data
             $stmt->bindParam(":name", $this->name);
-            $stmt->bindParam(":email", $this->email);
-            $stmt->bindParam(":age", $this->age);
+            $stmt->bindParam(":author", $this->author);
+            $stmt->bindParam(":collection", $this->collection);
+            $stmt->bindParam(":ISBN", $this->ISBN);
+            $stmt->bindParam(":dimensions", $this->dimensions);
             $stmt->bindParam(":designation", $this->designation);
             $stmt->bindParam(":created", $this->created);
-            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":modified", $this->modified);
         
             if($stmt->execute()){
                return true;
@@ -128,7 +155,7 @@
         }
 
         // DELETE
-        function deleteEmployee(){
+        function deleteBook(){
             $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE id = ?";
             $stmt = $this->conn->prepare($sqlQuery);
         

@@ -3,39 +3,37 @@
     header("Content-Type: application/json; charset=UTF-8");
     
     include_once '../config/database.php';
-    include_once '../class/employees.php';
+    include_once '../class/book.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $items = new Employee($db);
+    $items = new Book($db);
 
-    $stmt = $items->getEmployees();
+    $stmt = $items->getBooks();
     $itemCount = $stmt->rowCount();
-
-
-    echo json_encode($itemCount);
 
     if($itemCount > 0){
         
-        $employeeArr = array();
-        $employeeArr["body"] = array();
-        $employeeArr["itemCount"] = $itemCount;
+        $bookArray = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $e = array(
                 "id" => $id,
                 "name" => $name,
-                "email" => $email,
-                "age" => $age,
+                "author" => $author,
+                "collection" => $collection,
+                "ISBN" => $ISBN,
+                "dimensions" => $dimensions,
                 "designation" => $designation,
-                "created" => $created
+                "created" => $created,
+                "modified" => $modified
             );
 
-            array_push($employeeArr["body"], $e);
+            array_push($bookArray, $e);
         }
-        echo json_encode($employeeArr);
+        echo json_encode($bookArray);
     }
 
     else{

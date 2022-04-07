@@ -6,26 +6,29 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../config/database.php';
-    include_once '../class/employees.php';
+    include_once '../class/book.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $item = new Employee($db);
+    $item = new Book($db);
 
     $item->id = isset($_GET['id']) ? $_GET['id'] : die();
   
-    $item->getSingleEmployee();
+    $item->getSingleBook();
 
     if($item->name != null){
         // create array
         $emp_arr = array(
-            "id" =>  $item->id,
-            "name" => $item->name,
-            "email" => $item->email,
-            "age" => $item->age,
-            "designation" => $item->designation,
-            "created" => $item->created
+            "id" => $id,
+            "name" => $name,
+            "author" => $author,
+            "collection" => $collection,
+            "ISBN" => $ISBN,
+            "dimensions" => $dimensions,
+            "designation" => $designation,
+            "created" => $created,
+            "modified" => $modified
         );
       
         http_response_code(200);
