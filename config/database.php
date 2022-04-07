@@ -2,8 +2,8 @@
     class Database {
         private $host = "127.0.0.1";
         private $database_name = "api_books";
-        private $username = "root";
-        private $password = "";
+        private $username = "eloi";
+        private $password = "root";
 
         public $conn;
 

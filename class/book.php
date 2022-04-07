@@ -1,6 +1,5 @@
 <?php
     class Book{
-
         // Connection
         private $conn;
 

@@ -4,27 +4,31 @@
     header("Access-Control-Allow-Methods: POST");
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
+
     include_once '../config/database.php';
-    include_once '../class/employees.php';
-    
+    include_once '../class/book.php';
+
     $database = new Database();
     $db = $database->getConnection();
-    
-    $item = new Employee($db);
-    
-    $data = json_decode(file_get_contents("php://input"));
-    
+
+    $item = new Book($db);
+
+    $data = json_decode(file_get_contents("php://input"), true);
+
+
     $item->id = $data->id;
-    
-    // employee values
+
+    // book
+// values
     $item->name = $data->name;
-    $item->email = $data->email;
-    $item->age = $data->age;
+    $item->author = $data->author;
+    $item->collection = $data->collection;
+    $item->ISBN = $data->ISBN;
+    $item->dimensions = $data->dimensions;
     $item->designation = $data->designation;
-    $item->created = date('Y-m-d H:i:s');
-    
-    if($item->updateEmployee()){
+    $item->modified = date('Y-m-d H:i:s');
+
+    if($item->updateBook()){
         echo json_encode("Employee data updated.");
     } else{
         echo json_encode("Data could not be updated");

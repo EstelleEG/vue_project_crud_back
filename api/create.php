@@ -6,24 +6,26 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../config/database.php';
-    include_once '../class/employees.php';
+    include_once '../class/book.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $item = new Employee($db);
+    $item = new Book ($db);
 
     $data = json_decode(file_get_contents("php://input"));
 
     $item->name = $data->name;
-    $item->email = $data->email;
-    $item->age = $data->age;
+    $item->author = $data->author;
+    $item->collection = $data->collection;
+    $item->ISBN = $data->ISBN;
+    $item->dimensions = $data->dimensions;
     $item->designation = $data->designation;
-    $item->created = date('Y-m-d H:i:s');
+    $item->modified = date('Y-m-d H:i:s');
     
-    if($item->createEmployee()){
-        echo 'Employee created successfully.';
+    if($item->createBook()){
+        echo 'Book created successfully.';
     } else{
-        echo 'Employee could not be created.';
+        echo 'Book could not be created.';
     }
 ?>
