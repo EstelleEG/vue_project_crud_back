@@ -17,18 +17,18 @@
   
     $item->getSingleBook();
 
-    if($item->name != null){
+    if($item->name !== null){
         // create array
         $emp_arr = array(
-            "id" => $id,
-            "name" => $name,
-            "author" => $author,
-            "collection" => $collection,
-            "ISBN" => $ISBN,
-            "dimensions" => $dimensions,
-            "designation" => $designation,
-            "created" => $created,
-            "modified" => $modified
+            "id" => $item->id,
+            "name" => $item->name,
+            "author" =>$item->author,
+            "collection" =>$item->collection,
+            "ISBN" => $item->ISBN,
+            "dimensions" => $item->dimensions,
+            "designation" => $item->designation,
+            "created" => $item->created,
+            "modified" => $item->modified
         );
       
         http_response_code(200);
