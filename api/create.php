@@ -21,8 +21,9 @@
     $item->ISBN = $data->ISBN;
     $item->dimensions = $data->dimensions;
     $item->designation = $data->designation;
+    $item->created = date('Y-m-d H:i:s');
     $item->modified = date('Y-m-d H:i:s');
-    
+
     if($item->createBook()){
         echo 'Book created successfully.';
     } else{

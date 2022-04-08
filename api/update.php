@@ -13,13 +13,11 @@
 
     $item = new Book($db);
 
-    $data = json_decode(file_get_contents("php://input"), true);
-
+    $data = json_decode(file_get_contents("php://input"));
 
     $item->id = $data->id;
 
-    // book
-// values
+    // book values
     $item->name = $data->name;
     $item->author = $data->author;
     $item->collection = $data->collection;
@@ -29,7 +27,7 @@
     $item->modified = date('Y-m-d H:i:s');
 
     if($item->updateBook()){
-        echo json_encode("Employee data updated.");
+        echo json_encode("Book data updated.");
     } else{
         echo json_encode("Data could not be updated");
     }
