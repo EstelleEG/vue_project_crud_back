@@ -23,6 +23,7 @@
     $item->designation = $data->designation;
     $item->created = date('Y-m-d H:i:s');
     $item->modified = date('Y-m-d H:i:s');
+    $item->imageURL = $data->imageURL;
 
     if($item->createBook()){
         echo 'Book created successfully.';

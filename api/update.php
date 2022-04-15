@@ -25,6 +25,7 @@
     $item->dimensions = $data->dimensions;
     $item->designation = $data->designation;
     $item->modified = date('Y-m-d H:i:s');
+    $item->imageURL = $data->imageURL;
 
     if($item->updateBook()){
         echo json_encode("Book data updated.");

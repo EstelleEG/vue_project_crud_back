@@ -28,7 +28,8 @@
                 "dimensions" => $dimensions,
                 "designation" => $designation,
                 "created" => $created,
-                "modified" => $modified
+                "modified" => $modified, 
+                "imageURL" => $imageURL
             );
 
             array_push($bookArray, $e);

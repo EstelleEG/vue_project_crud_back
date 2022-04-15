@@ -28,7 +28,8 @@
             "dimensions" => $item->dimensions,
             "designation" => $item->designation,
             "created" => $item->created,
-            "modified" => $item->modified
+            "modified" => $item->modified,
+            "imageURL" => $item->imageURL
         );
       
         http_response_code(200);

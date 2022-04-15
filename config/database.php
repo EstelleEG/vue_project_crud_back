@@ -1,9 +1,9 @@
 <?php 
     class Database {
-        private $host = "127.0.0.1";
-        private $database_name = "api_books";
-        private $username = "eloi";
-        private $password = "root";
+        private $host = "109.234.161.150";
+        private $database_name = "dhqm1449_estelleG";
+        private $username = "dhqm1449_estelleG";
+        private $password = "nJbTCMDmBP2Y";
 
         public $conn;
 
